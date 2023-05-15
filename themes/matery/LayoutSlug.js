@@ -108,7 +108,7 @@ export const LayoutSlug = props => {
             <Announcement {...props}/>
 
             {/* 右侧文章目录 */}
-            {post?.toc?.length > 0 && <div id='toc-wrapper' style={{ zIndex: '-1' }} className='absolute top-0 w-full h-full xl:block hidden lg:max-w-3xl 2xl:max-w-4xl' >
+            {post?.toc?.length > 0 && <div id='toc-wrapper' style={{ zIndex: '-1' }} className='absolute top-0 w-full h-full lg:block hidden lg:max-w-3xl 2xl:max-w-4xl' >
                 <div data-aos-delay="200"
                     data-aos="fade-down"
                     data-aos-duration="200"
