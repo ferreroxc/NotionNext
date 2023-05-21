@@ -35,6 +35,20 @@ export async function getStaticProps() {
     slug: '',
     type: 'website'
   }
+
+  const categoryPosts = {}
+
+  props.posts.forEach(post => {
+    const cate = post.category
+    if (categoryPosts[cate]) {
+      categoryPosts[cate].push(post)
+    } else {
+      categoryPosts[cate] = [post]
+    }
+  })
+
+  props.categoryPosts = categoryPosts
+
   // 处理分页
   if (BLOG.POST_LIST_STYLE === 'scroll') {
     // 滚动列表默认给前端返回所有数据

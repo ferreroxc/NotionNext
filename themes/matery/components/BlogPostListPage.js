@@ -11,9 +11,11 @@ import PaginationSimple from './PaginationSimple'
  * @returns {JSX.Element}
  * @constructor
  */
-const BlogPostListPage = ({ page = 1, posts = [], postCount, siteInfo }) => {
+const BlogPostListPage = ({ page = 1, posts = [], categoryPosts = [], postCount, siteInfo }) => {
   const totalPage = Math.ceil(postCount / BLOG.POSTS_PER_PAGE)
   const showPagination = postCount >= BLOG.POSTS_PER_PAGE
+  posts = categoryPosts
+
   if (!posts || posts.length === 0 || page > totalPage) {
     return <BlogPostListEmpty />
   } else {
@@ -22,9 +24,22 @@ const BlogPostListPage = ({ page = 1, posts = [], postCount, siteInfo }) => {
         <div className='pt-6'></div>
         {/* 文章列表 */}
         <div className="pt-4 flex flex-wrap pb-12" >
-          {posts.map(post => (
-           <div key={post.id} className='xl:w-1/3 md:w-1/2 w-full p-4'> <BlogPostCard index={posts.indexOf(post)} post={post} siteInfo={siteInfo} /></div>
+          {Object.keys(categoryPosts).map(cateTitle => (
+            <div>
+              <div
+                className="pt-8 pb-4 text-3xl dark:text-gray-300"
+                id={cateTitle}
+              >
+                {cateTitle}
+              </div>
+              <ul className="w-full">
+                {categoryPosts[cateTitle].map(post => (
+                  <div key={post.id} className='w-full'> <BlogPostCard  post={post} siteInfo={siteInfo} /></div>
+                ))}
+              </ul>
+            </div>
           ))}
+          
         </div>
         {showPagination && <PaginationSimple page={page} totalPage={totalPage} />}
       </div>
