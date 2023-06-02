@@ -5,7 +5,15 @@ const NotionPage = dynamic(() => import('@/components/NotionPage'))
 
 const Announcement = ({ notice }) => {
   const { locale } = useGlobal()
-  if (!notice) {
+  const isEmpty = (() => {
+    for (const prop in obj) {
+        if (Object.hasOwn(obj, prop)) {
+            return false
+        }
+    }
+    return true
+  })
+  if (isEmpty) {
     return <></>
   }
   return <div className="px-3 w-full">
